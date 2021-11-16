@@ -23,6 +23,10 @@ module.exports = {
                         presets: ["@babel/preset-env", "@babel/preset-react"]
                     }
                 }
+            }, 
+            {
+                test: /\.css/, 
+                use: ["style-loader", "css-loader"]
             }
         ]
     }, 
@@ -31,9 +35,10 @@ module.exports = {
         static: {
             publicPath: '/build/'
         },
-        port: 7000, 
+        port: 8080, 
         proxy: {
             '/api': 'http://localhost:3000'
-        }
+        }, 
+        historyApiFallback: true
     }
 }

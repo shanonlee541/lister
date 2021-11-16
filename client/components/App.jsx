@@ -1,19 +1,19 @@
 import React, { Component } from "react";
+import { render } from "react-dom";
+// Routes replaced Switch 
+import { Switch, Route } from 'react-router-dom';
+import Test from "./Test.jsx";
 
 class App extends Component {
     render() {
         return (
-            <div>
-                <h1>
-                    Does hot reload work?
-                </h1>
-                <h2>test with h2</h2>
-                <h3>hot reload</h3>
-                <h4>Does this work?</h4>
-                <h1> Additional h1, should not load! </h1>
-            </div>
+            <Switch>
+                <Route exact path='/login' component={Test} />
+            </Switch>
+            // <Test />
         )
     }
 }
+
 
 export default App;

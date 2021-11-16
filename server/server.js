@@ -13,9 +13,9 @@ if (process.env.NODE_ENV === 'production') {
 
 // If development mode
 else {
-    app.get('/api', (req, res) => {
-        res.send('API ROUTE REACHED THROUGH SERVER JS')
-    });
+    // app.get('/api', (req, res) => {
+    //     res.send('API ROUTE REACHED THROUGH SERVER JS')
+    // });
 }
 
 app.listen(3000, () => console.log(`Listening on port 3000 in ${process.env.NODE_ENV} mode...`))
