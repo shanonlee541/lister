@@ -1,7 +1,15 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
+
+const itemRoutes = require('./routes/itemRoutes.js');
 
 const app = express();
+
+// urlEncoding for queryStrings
+app.use(bodyParser.urlencoded({ extended: true }));
+// For POST requests, you need to recognize and convert incoming data as json data! 
+app.use(express.json());
 
 // If in production mode, serve static build folder
 if (process.env.NODE_ENV === 'production') {
@@ -13,9 +21,22 @@ if (process.env.NODE_ENV === 'production') {
 
 // If development mode
 else {
-    // app.get('/api', (req, res) => {
-    //     res.send('API ROUTE REACHED THROUGH SERVER JS')
-    // });
+    // Redirect requests to /items to itemRoutes
+    app.use('/items', itemRoutes);
+
+    // Global Error Handler 
+    app.use((err, req, res, next) => {
+        const defaultError = {
+            status: 500, 
+            message: 'Default Express Error from server... Something went wrong.'
+        }
+        // Replace defaultError with custom error if passed in 
+        const customError = Object.assign({}, defaultError, err);
+        return res
+            .status(customError.status)
+            .send(customError.messsage);
+    })
+
 }
 
 app.listen(3000, () => console.log(`Listening on port 3000 in ${process.env.NODE_ENV} mode...`))

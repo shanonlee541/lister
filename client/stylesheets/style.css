@@ -1,3 +1,15 @@
 body {
-    background-color: lightblue;
+    background-color: rgb(235, 242, 245);
+}
+
+.sm-container {
+    width: 50%;
+}
+
+.center {
+    margin-inline: auto;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
 }

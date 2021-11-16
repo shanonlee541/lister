@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-// Routes replaced Switch 
 import { Switch, Route } from 'react-router-dom';
-import Test from "./Test.jsx";
+import AddForm from "./AddForm.jsx";
 
 class App extends Component {
     render() {
         return (
             <Switch>
-                <Route exact path='/login' component={Test} />
+                <Route exact path='/dashboard' component={AddForm} />
+                <Route exact path='/add' component={AddForm} />
             </Switch>
-            // <Test />
         )
     }
 }

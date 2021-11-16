@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Test from './components/Test.jsx';
+import Test from './components/AddForm.jsx';
 import App from './components/App.jsx';
+import 'bootstrap/dist/css/bootstrap.css';
 
-// uncomment so that webpack can bundle styles
 import style from './stylesheets/style.css';
 
 render(
