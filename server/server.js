@@ -15,6 +15,22 @@ app.use(express.urlencoded({ extended: true }))
 // If in production mode, serve static build folder
 if (process.env.NODE_ENV === 'production') {
     app.use('/build', express.static(path.join(__dirname, '../build')));
+    app.use('/items', itemRoutes);
+
+    // Global Error Handler 
+    app.use((err, req, res, next) => {
+        const defaultError = {
+            status: 500, 
+            message: 'Default Express Error from server... Something went wrong.'
+        }
+        // Replace defaultError with custom error if passed in 
+        const customError = Object.assign({}, defaultError, err);
+        return res
+            .status(customError.status)
+            .send(customError.messsage);
+    })
+
+    // Serve template
     app.use('*', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '../index.html'));
     })

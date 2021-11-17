@@ -7,7 +7,6 @@ import EditForm from './EditForm.jsx';
 import Dashboard from "./Dashboard.jsx";
 
 class App extends Component {
-    // Need to use match
     constructor(props) {
         super(props);
     }
@@ -15,7 +14,7 @@ class App extends Component {
         return (
             <Switch>
                 <Route exact path='/add' component={AddForm} />
-                <Route path='/edit' component={EditForm} />
+                {/* <Route path='/edit' component={EditForm} /> */}
                 <Route exact path='/' component={Dashboard} />
             </Switch>
         )

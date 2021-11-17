@@ -10,7 +10,6 @@ class ItemCard extends Component {
         // Isolate properties from props objects
         const { item_id, name, price, description, url } = this.props;
         const fullUrl = `http://${url}`;
-        const editUrl = `/edit/${item_id}`;
 
         return (
             <div className='block-margin-sm'>

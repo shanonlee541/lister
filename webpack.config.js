@@ -41,6 +41,8 @@ module.exports = {
         proxy: {
             '/items': 'http://localhost:3000'
         }, 
-        // historyApiFallback: true
+        // Need this to use react-router properly on dev server
+        // Page is served instead of 404 not found! 
+        historyApiFallback: true
     }
 }
