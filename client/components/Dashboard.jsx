@@ -31,6 +31,7 @@ class Dashboard extends Component {
         for (let i = 0; i < this.state.items.length; i++) {
             items.push(
                 <ItemCard 
+                    item_id={this.state.items[i].item_id}
                     name={this.state.items[i].name} 
                     price={this.state.items[i].price}
                     description={this.state.items[i].description}

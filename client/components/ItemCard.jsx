@@ -8,8 +8,10 @@ class ItemCard extends Component {
     }
     render() {
         // Isolate properties from props objects
-        const { name, price, description, url } = this.props;
-        const fullUrl = `http://${url}`
+        const { item_id, name, price, description, url } = this.props;
+        const fullUrl = `http://${url}`;
+        const editUrl = `/edit/${item_id}`;
+
         return (
             <div className='block-margin-sm'>
                 <Card>
@@ -24,7 +26,7 @@ class ItemCard extends Component {
                             </Button>
 
                             <Button color='secondary' className='left-margin-sm'>
-                                <a href='/edit'>Edit Item</a>
+                                <a href={`/edit?item_id=${item_id.toString()}`}>Edit Item</a>
                             </Button>
 
                             <Button color='danger' className='left-margin-sm'>

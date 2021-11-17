@@ -41,6 +41,6 @@ module.exports = {
         proxy: {
             '/items': 'http://localhost:3000'
         }, 
-        historyApiFallback: true
+        // historyApiFallback: true
     }
 }
