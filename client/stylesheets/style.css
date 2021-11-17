@@ -6,6 +6,12 @@ body {
     width: 50%;
 }
 
+.lg-container-padded {
+    width: 100%;
+    padding: 20px;
+    margin: 50px;
+}
+
 .center {
     margin-inline: auto;
 }
@@ -13,3 +19,4 @@ body {
 .margin-top-20 {
     margin-top: 20px;
 }
+

@@ -37,5 +37,40 @@ itemsController.addItem = (req, res, next) => {
         });
 }
 
+// Fetch items from database with user and category from req.query 
+itemsController.fetchItems = (req, res, next) => {
+    const { user, category } = req.query;
+    if (!user || !category) {
+        return next({
+            status: 400, 
+            message: 'itemsController.fetchItems: Request does not contain user or category.'
+        })
+    }
+
+    // query to left join user id and category onto items 
+    const queryString = 
+    `SELECT users.user_id as user, items.name, items.price, items.description, items.url, items.category
+    FROM items
+    LEFT JOIN users ON users.user_id = items.user_id
+    LEFT JOIN category ON items.category = category.category_name
+    WHERE users.user_id = $1 AND category= $2;`
+
+    const values = [user, category];
+
+    // Query db 
+    db.query(queryString, values)
+        .then(data => {
+            // data is an object with rows; need to isolate rows. Gives an array of objects
+            res.locals.items = data.rows;
+            return next();
+        })
+        .catch(err => {
+            return next({
+                status: 500, 
+                message: `itemsController.fetchItems error: Fail to query db. ${err}`
+            })
+        })
+
+}
 
 module.exports = itemsController;
