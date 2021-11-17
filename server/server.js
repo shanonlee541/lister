@@ -6,8 +6,6 @@ const itemRoutes = require('./routes/itemRoutes.js');
 
 const app = express();
 
-// test
-
 // urlEncoding for queryStrings
 // app.use(bodyParser.urlencoded({ extended: false }));
 // For POST requests, you need to recognize and convert incoming data as json data! 

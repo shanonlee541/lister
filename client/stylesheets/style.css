@@ -25,6 +25,10 @@ body {
     margin-block: 10px;
 }
 
+.block-margin-lg {
+    margin-block: 50px;
+}
+
 .inline-margin-sm {
     margin-inline: 10px;
 }

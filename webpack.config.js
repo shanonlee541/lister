@@ -39,7 +39,8 @@ module.exports = {
         },
         port: 8080, 
         proxy: {
-            '/items': 'http://localhost:3000'
+            '/items': 'http://localhost:3000', 
+            '/user': 'http://localhost:3000'
         }, 
         // Need this to use react-router properly on dev server
         // Page is served instead of 404 not found! 

@@ -122,7 +122,7 @@ class AddForm extends Component {
                     <Button color='primary' onClick={this.handleSubmit}>Add Item</Button>
     
                     <Button color='secondary' className='left-margin-sm'>
-                        <a href='/'>Back to Dashboard</a>
+                        <a href='/dashboard'>Back to Dashboard</a>
                     </Button>
 
                 </Form>

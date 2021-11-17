@@ -139,7 +139,7 @@ class EditForm extends Component {
                 <Button color='primary' onClick={this.handleSubmit}>Submit Edits</Button>
 
                 <Button color='secondary' className='left-margin-sm'>
-                    <a href='/'>Back to Dashboard</a>
+                    <a href='/dashboard'>Back to Dashboard</a>
                 </Button>
             </Form>
 
