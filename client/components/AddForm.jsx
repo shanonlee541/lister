@@ -118,11 +118,13 @@ class AddForm extends Component {
                             Food
                         </Label>
                     </FormGroup>
-           
+                                   
+                    <Button color='primary' onClick={this.handleSubmit}>Add Item</Button>
+    
+                    <Button color='secondary' className='left-margin-sm'>
+                        <a href='/dashboard'>Back to Dashboard</a>
+                    </Button>
 
-                    <FormGroup>
-                        <Button color='primary' onClick={this.handleSubmit}>Add Item</Button>
-                    </FormGroup>
                 </Form>
             </div>
         )

@@ -14,9 +14,42 @@ body {
 
 .center {
     margin-inline: auto;
+    width: 50%;
 }
 
 .margin-top-20 {
     margin-top: 20px;
+}
+
+.block-margin-sm {
+    margin-block: 10px;
+}
+
+.inline-margin-sm {
+    margin-inline: 10px;
+}
+
+.left-margin-sm {
+    margin-left: 10px;
+}
+
+.right-margin-sm {
+    margin-right: 10px;
+}
+
+
+.flex-row {
+    display: flex;
+    align-items: baseline;
+}
+
+/* ********************* Links ********************* */
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
 }
 
