@@ -21,8 +21,15 @@ router.post('/', itemsController.addItem, (req, res) => {
 // PATCH requests to /items?item_id=X
 router.patch('/', itemsController.updateItem, (req, res) => {
     res
-        .status(202)
+        .status(200)
         .send('Successful Update From Backend')
+});
+
+// DELETE request to /items?item_id=X
+router.delete('/', itemsController.deleteItem, (req, res) => {
+    res
+        .status(200)
+        .send('successful delete from db');
 })
 
 // Export whole router

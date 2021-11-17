@@ -38,9 +38,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // If development mode
 else {
-    // Redirect requests to /items to itemRoutes
-    // I think I need to move these routes to the production if block as well, or else 
-    // server can't handle the requests
     app.use('/items', itemRoutes);
 
     // Global Error Handler 

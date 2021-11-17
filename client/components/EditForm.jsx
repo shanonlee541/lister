@@ -45,6 +45,9 @@ class EditForm extends Component {
         const newUrl = document.getElementById('item-url').value;
         const newCategory = this.state.category || this.state.currentItemDetails.category;
 
+        const form = document.getElementById('edit-form');
+        form.reset();
+        
         // Make PATCH request to server
         const { item_id } = this.state.currentItemDetails;
 

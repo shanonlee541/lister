@@ -108,13 +108,6 @@ itemsController.updateItem = (req, res, next) => {
     }
 
     // Perform UPDATE on items table
-    // const queryString = 
-    // `UPDATE items
-    // SET items.name = ${name}, price = ${price}, description = ${description}, 
-    // category = ${category}, url = ${url}
-    // WHERE item_id = ${item_id}
-    // RETURNING *;`;
-
     const queryString = 
     `UPDATE items
     SET price = '${newPrice}', description='${newDescription}', name='${newName}', 
@@ -132,6 +125,29 @@ itemsController.updateItem = (req, res, next) => {
                 message: `itemsController.updateItem: Could not update item in database. ${err}`
             })
         })
+};
+
+// DELETE request to /items?item_id=5
+itemsController.deleteItem = (req, res, next) => {
+    const { item_id } = req.query;
+    // If delete id not found
+    if (!item_id) {
+        return next({
+            status: 400, 
+            message: `itemsController.deleteItem: Could not delete item. Item ID not found in request.`
+        })
+    }
+
+    const queryString = 
+    `DELETE FROM items
+    WHERE item_id = '${item_id}';`
+
+    // Delete from db
+    db.query(queryString)
+        .then(data => {
+            return next();
+        })
+        .catch(err => `Err ${err}`);
     
 }
 

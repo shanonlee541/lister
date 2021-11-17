@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import { Card, CardTitle, CardBody, CardSubtitle, CardText, Button, Row } from 'reactstrap';
+import { Card, CardTitle, CardBody, CardSubtitle, Button } from 'reactstrap';
 
 class ItemCard extends Component {
     constructor(props) {
         super(props);
+
+        // // Bind methods 
+        // this.deleteItem = this.deleteItem.bind(this);
     }
+
+
+
     render() {
         // Isolate properties from props objects
-        const { item_id, name, price, description, url } = this.props;
+        const { item_id, name, price, description, url, deleteItem } = this.props;
         const fullUrl = `http://${url}`;
 
         return (
@@ -28,8 +34,8 @@ class ItemCard extends Component {
                                 <a href={`/edit?item_id=${item_id.toString()}`}>Edit Item</a>
                             </Button>
 
-                            <Button color='danger' className='left-margin-sm'>
-                                <a href=''>Delete Item</a>
+                            <Button color='danger' className='left-margin-sm' id={item_id} onClick={deleteItem}>
+                                Delete Item
                             </Button>
                         </div>
 

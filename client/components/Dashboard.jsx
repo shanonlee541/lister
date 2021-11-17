@@ -10,6 +10,7 @@ class Dashboard extends Component {
 
         // Bind methods
         this.handleClick = this.handleClick.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     // Add methods to fetch appropriate data 
@@ -25,6 +26,36 @@ class Dashboard extends Component {
             .catch(err => console.log('frontend GET home fail: ' + err));
     }
 
+    // Method to delete item based on item id 
+    deleteItem(e) {
+        const deleteId = e.target.id;
+
+        const optionsObject = {
+            method: 'DELETE'
+        }
+
+        // DELETE request to /items?item_id=5
+        fetch(`/items?item_id=${deleteId}`, optionsObject)
+            .then(res => {console.log('Delete request successful')})
+            .then(response => {
+                // After delete, make a fetch request to get items and update state.
+                fetch('/items?user=1&category=home')
+                .then(response => response.json())
+                .then(jsonData => {
+                    this.setState({ items: jsonData.items });
+                    console.log(this.state)
+                })
+                .catch(err => {
+                    console.log('Inner fetch errror: ' + err);
+                })
+            })
+            .catch(err => console.log(`Err: ${err}`))
+
+        
+    }
+
+
+
     render() {
         const items = [];
         // Loop through this.state.items to generate card items for each item from db 
@@ -36,7 +67,8 @@ class Dashboard extends Component {
                     price={this.state.items[i].price}
                     description={this.state.items[i].description}
                     url={this.state.items[i].url}
-                    key={`${this.state.items[i].url}${this.state.items[i].item_id}`} 
+                    key={`${this.state.items[i].url}${this.state.items[i].item_id}`}
+                    deleteItem = {this.deleteItem} 
                 />)
         }
 
