@@ -51,6 +51,7 @@ else {
         }
         // Replace defaultError with custom error if passed in 
         const customError = Object.assign({}, defaultError, err);
+        console.log(customError.message);
         return res
             .status(customError.status)
             .send(customError.messsage);

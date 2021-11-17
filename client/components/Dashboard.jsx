@@ -36,7 +36,7 @@ class Dashboard extends Component {
                     price={this.state.items[i].price}
                     description={this.state.items[i].description}
                     url={this.state.items[i].url}
-                    key={`${this.state.items[i].url}`} 
+                    key={`${this.state.items[i].url}${this.state.items[i].item_id}`} 
                 />)
         }
 

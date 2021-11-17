@@ -94,4 +94,46 @@ itemsController.fetchItems = (req, res, next) => {
     }
 }
 
+// Update item in DB based on item_id 
+itemsController.updateItem = (req, res, next) => {
+    const { item_id } = req.query;
+    const { newName, newPrice, newDescription, newUrl, newCategory } = req.body;
+
+
+    if (!item_id) {
+        return next({
+            status: 400, 
+            message: 'itemsController.updateItem Error: Item ID not found. Failed to update.'
+        })
+    }
+
+    // Perform UPDATE on items table
+    // const queryString = 
+    // `UPDATE items
+    // SET items.name = ${name}, price = ${price}, description = ${description}, 
+    // category = ${category}, url = ${url}
+    // WHERE item_id = ${item_id}
+    // RETURNING *;`;
+
+    const queryString = 
+    `UPDATE items
+    SET price = '${newPrice}', description='${newDescription}', name='${newName}', 
+    url='${newUrl}', category='${newCategory}'
+    WHERE item_id = ${item_id}
+    RETURNING *;`;
+
+    db.query(queryString) 
+        .then(data => {
+            return next();
+        })
+        .catch(err => {
+            return next({
+                status: 500, 
+                message: `itemsController.updateItem: Could not update item in database. ${err}`
+            })
+        })
+    
+}
+
+
 module.exports = itemsController;

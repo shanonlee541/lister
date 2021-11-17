@@ -18,5 +18,12 @@ router.post('/', itemsController.addItem, (req, res) => {
         .json(res.locals.addedItem);
 });
 
+// PATCH requests to /items?item_id=X
+router.patch('/', itemsController.updateItem, (req, res) => {
+    res
+        .status(202)
+        .send('Successful Update From Backend')
+})
+
 // Export whole router
 module.exports = router;

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import ErrorToast from "./ErrorToast.jsx";
 
 class EditForm extends Component {
     // Local state to handle changing category buttons 
@@ -8,7 +7,8 @@ class EditForm extends Component {
         super(props);
         this.state = {
             loading: true, 
-            currentItemDetails: {}
+            currentItemDetails: {}, 
+            category: null
         }
 
         // Bind methods 
@@ -39,11 +39,32 @@ class EditForm extends Component {
     // Edit Form Submit
     handleSubmit(e) {
         e.preventDefault();
-        const name = document.getElementById('item-name').value;
-        const price = document.getElementById('item-price').value;
-        const description = document.getElementById('item-description').value;
-        const url = document.getElementById('item-url').value;
-        const category = this.state.category;
+        const newName = document.getElementById('item-name').value;
+        const newPrice = document.getElementById('item-price').value;
+        const newDescription = document.getElementById('item-description').value;
+        const newUrl = document.getElementById('item-url').value;
+        const newCategory = this.state.category || this.state.currentItemDetails.category;
+
+        // Make PATCH request to server
+        const { item_id } = this.state.currentItemDetails;
+
+        const optionsObject = {
+            method: 'PATCH', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                newName, 
+                newPrice, 
+                newDescription,
+                newUrl,
+                newCategory
+            })
+        };
+
+        fetch(`/items?item_id=${item_id}`, optionsObject)
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
     }
 
     // Populate current form data based on current state pulled from db 

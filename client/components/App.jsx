@@ -14,7 +14,7 @@ class App extends Component {
         return (
             <Switch>
                 <Route exact path='/add' component={AddForm} />
-                {/* <Route path='/edit' component={EditForm} /> */}
+                <Route path='/edit' component={EditForm} />
                 <Route exact path='/' component={Dashboard} />
             </Switch>
         )
