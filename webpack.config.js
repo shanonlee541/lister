@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// Create index.html file that has <script> with src ='/build/bundle.js' injected into it!!! 
 const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
     template: './index.html'
 });
@@ -25,6 +26,7 @@ module.exports = {
                 }
             }, 
             {
+                // css-loader interprets @import and url() like import/require() and will resolve them.
                 test: /\.css/, 
                 use: ["style-loader", "css-loader"]
             }

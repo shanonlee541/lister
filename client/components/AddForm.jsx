@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import ErrorToast from "./ErrorToast.jsx";
 
 class AddForm extends Component {
     // Local state to handle changing category buttons 
@@ -18,6 +19,10 @@ class AddForm extends Component {
     // Form Submit
     handleSubmit(e) {
         e.preventDefault();
+
+        // Clear errors if there was one 
+        this.setState({ error: null })
+        
         const name = document.getElementById('item-name').value;
         const price = document.getElementById('item-price').value;
         const description = document.getElementById('item-description').value;
@@ -45,14 +50,13 @@ class AddForm extends Component {
         }
         
         fetch('/items?user=1', optionsObject)
-            .then(data => data.json())
-            .then(jsonData => {
-                console.log(jsonData);
+            .then(response => response.json())
+            .then(addedItem => {
+                console.log(`Command: ${addedItem.command} was successful`);
             })
             .catch(err => {
                 console.log(`Request to /items?user=1 failed: ${err}`);
                 this.setState({ error: `Failed to add item. Error: ${err}`});
-                console.log(this.state)
             })
     }
 
@@ -65,6 +69,7 @@ class AddForm extends Component {
         return (
             <div className='sm-container center margin-top-20'>
                 <h2>Add New Item</h2>
+                { this.state.error && <ErrorToast errorMessage={this.state.error} /> }
                 <Form id='add-form'>
                     <FormGroup>
                         <Label for='item-name'>Item Name</Label>
