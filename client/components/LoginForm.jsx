@@ -14,9 +14,9 @@ const mapDispatchToProps = dispatch => ({
 
 // Test to see if connect() works -- connect WORKS, mapStateToProps works
 // Something wrong with syntax in mapDispatchToProps
-const mapStateToProps = state => ({
-    user_id: state.user.user_id
-})
+// const mapStateToProps = state => ({
+//     user_id: state.user.user_id
+// })
 
 class LoginForm extends Component {
     constructor(props) {

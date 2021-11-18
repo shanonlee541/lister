@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const itemRoutes = require('./routes/itemRoutes.js');
+const userRoutes = require('./routes/userRoutes.js');
 
 const app = express();
 
@@ -39,6 +40,7 @@ if (process.env.NODE_ENV === 'production') {
 // If development mode
 else {
     app.use('/items', itemRoutes);
+    app.use('/user', userRoutes);
 
     // Global Error Handler 
     app.use((err, req, res, next) => {
