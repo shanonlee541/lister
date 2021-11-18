@@ -10,7 +10,7 @@ function userSignup (name, username, password) {
         const optionsObject = {
             method: 'POST', 
             headers: {
-                'ContentType': 'application/json'
+                'Content-Type': 'application/json'
             }, 
             body: JSON.stringify({
                 name, 
@@ -19,12 +19,17 @@ function userSignup (name, username, password) {
             })
         }
 
+        
+
         // Make POST request to backend to send back newly created user 
-        fetch('/users/signup', optionsObject)
+        fetch('/user/signup', optionsObject)
+            .then(data => data.json())
             .then(data => {
-                console.log('POST to /users/signup success!');
+                // Send back user_id from backend { user_id: X }
+                console.log(data.user_id)
                 // Dispatch success action 
                 dispatch(userSignupSuccess(data.user_id));
+        
             })
             .catch(err => {
                 console.log('Error ' + err);

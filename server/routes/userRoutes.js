@@ -10,6 +10,14 @@ router.post('/login', userController.loginUser, (req, res) => {
         .set('Content-Type', 'application/json')
         .status(200)
         .json({ user_id: res.locals.user_id })
+});
+
+// POST request to /user/signup 
+router.post('/signup', userController.createUser, (req, res) => {
+    return res
+        .set('Content-Type', 'application/json')
+        .status(200)
+        .json(res.locals.user_id);
 })
 
 module.exports = router;

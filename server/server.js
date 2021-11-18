@@ -33,6 +33,8 @@ if (process.env.NODE_ENV === 'production') {
 
     // Serve template
     app.use('*', (req, res) => {
+        // Is this supposed to point to the index.html file that gets built out in my build folder
+        // When I run npm run build?
         res.status(200).sendFile(path.join(__dirname, '../index.html'));
     })
 }

@@ -1,4 +1,4 @@
-import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL, USER_LOGOUT } from "../constants/userConstants";
+import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL, USER_LOGOUT, USER_SIGNUP_SUCCESS, USER_SIGNUP_REQUEST, USER_SIGNUP_FAIL } from "../constants/userConstants";
 
 const initialState = {
     loading: false, 
@@ -30,6 +30,36 @@ const userReducer = ( state = initialState, action ) => {
                 ...state, 
                 loading: false, 
                 error: action.payload
+            }
+        }
+
+        // Pending user signup 
+        case(USER_SIGNUP_REQUEST): {
+            return {
+                ...state, 
+                loading: true, 
+                error: null, 
+                user_id: null
+            }
+        }
+
+        // User signup success
+        case(USER_SIGNUP_SUCCESS): {
+            return {
+                ...state, 
+                loading: false, 
+                error: null, 
+                user_id: action.payload
+            }
+        }
+
+        // User signup fail
+        case (USER_SIGNUP_FAIL): {
+            return {
+                ...state, 
+                loading: false, 
+                error: action.payload, 
+                user_id: null
             }
         }
 

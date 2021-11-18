@@ -97,6 +97,7 @@ itemsController.fetchItems = (req, res, next) => {
 // Update item in DB based on item_id 
 itemsController.updateItem = (req, res, next) => {
     const { item_id, user } = req.query;
+    console.log(user)
     const { newName, newPrice, newDescription, newUrl, newCategory } = req.body;
 
     console.log(`${user} from patch request on backend`);

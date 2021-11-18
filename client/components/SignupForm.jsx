@@ -11,6 +11,11 @@ const mapDispatchToProps = dispatch => ({
     userSignup: (name, username, password) => dispatch(userSignup(name, username, password))
 })
 
+// Grab user_id from redux store to check if user is logged in 
+const mapStateToProps = state => ({
+    user_id: state.user.user_id
+})
+
 class SignUpForm extends Component {
     constructor(props) {
         super(props);
@@ -69,4 +74,4 @@ class SignUpForm extends Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(SignUpForm);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
