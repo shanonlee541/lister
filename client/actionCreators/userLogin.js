@@ -5,7 +5,9 @@
 
 import { userLoginRequest, userLoginSuccess, userLoginFail } from "./userActionCreators"
 
+// userLogin is my thunk action creator
 function userLogin(username, password) {
+    // This anonymous function is the thunk function
     return function (dispatch) {
         // Dispatch loading state for user login
         dispatch(userLoginRequest());

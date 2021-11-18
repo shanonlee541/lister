@@ -9,6 +9,7 @@ import LoginForm from './LoginForm.jsx';
 import LoginComponent from "./LoginComponent.jsx";
 import DashboardContainer from "./DashboardContainer.jsx";
 import AddFormContainer from "./AddFormContainer.jsx";
+import SignupForm from "./SignupForm.jsx";
 
 class App extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class App extends Component {
                 {/* <Route path='/edit' component={EditForm} /> */}
                 <Route path='/edit' render={(routeProps) => <EditForm {...routeProps} /> } />
                 <Route exact path='/dashboard' component={DashboardContainer} />
+                <Route path='/signup' render={() => <SignupForm />} />
                 <Route exact path='/' component={LoginComponent} />
             </Switch>
         )
