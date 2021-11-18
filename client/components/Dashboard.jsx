@@ -29,7 +29,8 @@ class Dashboard extends Component {
     // Add methods to fetch appropriate data 
     handleClick(e) {
         // GET request to /items?user=1&category=X on backend
-        fetch(`/items?user=1&category=${e.target.value}`)
+        // fetch(`/items?user=1&category=${e.target.value}`)
+        fetch(`/items?user=${this.props.user_id}&category=${e.target.value}`)
             .then(data => data.json())
             .then(itemsJSON => {
                 // itemsJSON has format: { items: [...] }
@@ -52,11 +53,10 @@ class Dashboard extends Component {
             .then(res => {console.log('Delete request successful')})
             .then(response => {
                 // After delete, make a fetch request to get items and update state.
-                fetch('/items?user=1&category=home')
+                fetch(`/items?user=${this.props.user_id}&category=home`)
                 .then(response => response.json())
                 .then(jsonData => {
                     this.setState({ items: jsonData.items });
-                    console.log(this.state)
                 })
                 .catch(err => {
                     console.log('Inner fetch errror: ' + err);
@@ -78,6 +78,7 @@ class Dashboard extends Component {
                     url={this.state.items[i].url}
                     key={`${this.state.items[i].url}${this.state.items[i].item_id}`}
                     deleteItem = {this.deleteItem} 
+                    user_id={this.props.user_id}
                 />)
         }
 

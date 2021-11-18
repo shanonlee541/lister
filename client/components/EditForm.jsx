@@ -24,6 +24,7 @@ class EditForm extends Component {
         // Search database for this data and populate form
         // GET /items?user=1&item_id=X
         fetch(`/items?user=1&item_id=${item_id}`)
+        // fetch(`/items?item_id=${item_id}`)
             .then(data => data.json())
             .then(response => {
                 this.setState({ currentItemDetails: response.items });
@@ -139,7 +140,6 @@ class EditForm extends Component {
                 <Button color='primary' onClick={this.handleSubmit}>Submit Edits</Button>
 
                 <Button color='secondary' className='left-margin-sm'>
-                    {/* <a href='/dashboard'>Back to Dashboard</a> */}
                     <Link to='/dashboard'>Back to Dashboard</Link>
                 </Button>
             </Form>
