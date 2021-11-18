@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { connect } from "react-redux";
+import { Redirect } from "react-router";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { testActionCreator } from "../actionCreators/userActionCreators";
 import userLogin from "../actionCreators/userLogin";
+import ErrorToast from './ErrorToast.jsx';
 
 // Put userLogin function into props object using mapDispatchToProps
 const mapDispatchToProps = dispatch => ({
@@ -14,9 +16,10 @@ const mapDispatchToProps = dispatch => ({
 
 // Test to see if connect() works -- connect WORKS, mapStateToProps works
 // Something wrong with syntax in mapDispatchToProps
-// const mapStateToProps = state => ({
-//     user_id: state.user.user_id
-// })
+const mapStateToProps = state => ({
+    user_id: state.user.user_id, 
+    error: state.user.error
+})
 
 class LoginForm extends Component {
     constructor(props) {
@@ -30,8 +33,8 @@ class LoginForm extends Component {
     handleLogin() {
         const inputUsername = document.getElementById('username').value;
         const inputPassword = document.getElementById('password').value;
-        console.log(inputUsername, inputPassword, this.props.user_id);
-        console.log(this.props.userLogin);
+        // console.log(inputUsername, inputPassword, this.props.user_id);
+        // console.log(this.props.userLogin);
         // this.props.userLogin(inputUsername, inputPassword);
         // Trigger method to dispatch userLogin action creator -- works
         this.props.userLogin(inputUsername, inputPassword)
@@ -42,10 +45,12 @@ class LoginForm extends Component {
     }
 
     render() {
-
         return (
+            // (this.props.error && <ErrorToast errorMessage={this.props.error} />)
+            (this.props.user_id ? <Redirect to='/dashboard' /> : 
             <Form className='sm-container center block-margin-lg'>
                 <FormGroup>
+                    {this.props.error && <ErrorToast errorMessage={this.props.error} />}
                     <Label for='username'>Username</Label>
                     <Input type='text' id='username' placeholder='Username'></Input>
                 </FormGroup>
@@ -57,8 +62,9 @@ class LoginForm extends Component {
 
                 <Button color='primary' onClick={this.handleLogin}>Log In</Button>
             </Form>
+            )
         )
     }
 }
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

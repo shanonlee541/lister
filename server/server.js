@@ -53,7 +53,7 @@ else {
         console.log(customError.message);
         return res
             .status(customError.status)
-            .send(customError.messsage);
+            .json(customError.messsage);
     })
 
 }

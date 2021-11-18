@@ -26,14 +26,14 @@ function userLogin(username, password) {
             .then(data => {
                 // If error in response (fetch can be weird with throwing errors)
                 if (data.error) {
-                    dispatch(userLoginFail(data.error));
+                    dispatch(userLoginFail('Login fail: Check username or password.'));
                     throw data.error;
                 }
                 // When get parsed data back, dispatch successful action
                 dispatch(userLoginSuccess(data.user_id));
             })
             .catch(err => {
-                dispatch(userLoginFail(err));
+                dispatch(userLoginFail('Login fail: Check username or password.'));
             })
     }
 }

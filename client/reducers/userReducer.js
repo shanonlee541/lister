@@ -3,7 +3,7 @@ import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL } from "../cons
 const initialState = {
     loading: false, 
     error: null,
-    user_id: 'test_user_id', 
+    user_id: null,
     testField: null
 }
 
@@ -12,7 +12,8 @@ const userReducer = ( state = initialState, action ) => {
         case (USER_LOGIN_REQUEST): {
             return {
                 ...state, 
-                loading: true
+                loading: true, 
+                error: null
             }
         }
 
@@ -20,7 +21,8 @@ const userReducer = ( state = initialState, action ) => {
             return {
                 ...state, 
                 loading: false, 
-                user_id: action.payload
+                user_id: action.payload, 
+                error: null
             }
         }
 
