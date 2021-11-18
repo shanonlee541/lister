@@ -77,7 +77,8 @@ class EditForm extends Component {
         };
 
         // EDIT BACKEND ROUTE FOR PATCH TO BE /ITEMS?ITEM_ID=X&USER_ID=THIS.PROPS.USER_ID
-        fetch(`/items?item_id=${item_id}`, optionsObject)
+        // fetch(`/items?item_id=${item_id}`, optionsObject)
+        fetch(`/items?user=${this.props.user_id}&item_id=${item_id}`, optionsObject)
             .then(data => console.log(data))
             .catch(err => console.log(err));
     }

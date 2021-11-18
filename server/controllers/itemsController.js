@@ -96,14 +96,15 @@ itemsController.fetchItems = (req, res, next) => {
 
 // Update item in DB based on item_id 
 itemsController.updateItem = (req, res, next) => {
-    const { item_id } = req.query;
+    const { item_id, user } = req.query;
     const { newName, newPrice, newDescription, newUrl, newCategory } = req.body;
 
+    console.log(`${user} from patch request on backend`);
 
-    if (!item_id) {
+    if (!item_id || !user) {
         return next({
             status: 400, 
-            message: 'itemsController.updateItem Error: Item ID not found. Failed to update.'
+            message: 'itemsController.updateItem Error: Item ID or user not found. Failed to update.'
         })
     }
 
@@ -112,7 +113,7 @@ itemsController.updateItem = (req, res, next) => {
     `UPDATE items
     SET price = '${newPrice}', description='${newDescription}', name='${newName}', 
     url='${newUrl}', category='${newCategory}'
-    WHERE item_id = ${item_id}
+    WHERE item_id = ${item_id} AND user_id = ${user}
     RETURNING *;`;
 
     db.query(queryString) 
@@ -129,18 +130,19 @@ itemsController.updateItem = (req, res, next) => {
 
 // DELETE request to /items?item_id=5
 itemsController.deleteItem = (req, res, next) => {
-    const { item_id } = req.query;
+    const { item_id, user } = req.query;
+  
     // If delete id not found
-    if (!item_id) {
+    if (!item_id || !user ) {
         return next({
             status: 400, 
-            message: `itemsController.deleteItem: Could not delete item. Item ID not found in request.`
+            message: `itemsController.deleteItem: Could not delete item. Item ID or user not found in request.`
         })
     }
 
     const queryString = 
     `DELETE FROM items
-    WHERE item_id = '${item_id}';`
+    WHERE item_id = '${item_id}' AND user_id = '${user}';`
 
     // Delete from db
     db.query(queryString)

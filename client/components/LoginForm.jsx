@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
-import { testActionCreator } from "../actionCreators/userActionCreators";
 import userLogin from "../actionCreators/userLogin";
 import ErrorToast from './ErrorToast.jsx';
 

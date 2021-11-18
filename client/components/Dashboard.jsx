@@ -49,7 +49,7 @@ class Dashboard extends Component {
         }
 
         // DELETE request to /items?item_id=5
-        fetch(`/items?item_id=${deleteId}`, optionsObject)
+        fetch(`/items?user=${this.props.user_id}&item_id=${deleteId}`, optionsObject)
             .then(res => {console.log('Delete request successful')})
             .then(response => {
                 // After delete, make a fetch request to get items and update state.
