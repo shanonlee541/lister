@@ -3,26 +3,30 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
-import userLogin from "../actionCreators/userLogin";
+import userSignup from "../actionCreators/userSignup.js";
 import ErrorToast from './ErrorToast.jsx';
 
+// mapDispatch to dispatch thunk action creator ( signup new user )
+const mapDispatchToProps = dispatch => ({
+    userSignup: (name, username, password) => dispatch(userSignup(name, username, password))
+})
 
 class SignUpForm extends Component {
     constructor(props) {
         super(props);
 
         // Bind methods
-        this.handleLogin = this.handleLogin.bind(this);
+        this.handleSignup = this.handleSignup.bind(this);
     }
 
     // Handle user login method
-    handleLogin() {
-        const inputUsername = document.getElementById('username').value;
-        const inputPassword = document.getElementById('password').value;
-   
-        // Trigger method to dispatch userLogin action creator -- works
-        this.props.userLogin(inputUsername, inputPassword)
+    handleSignup() {
+        const inputUsername = document.getElementById('signup-username').value;
+        const inputPassword = document.getElementById('signup-password').value;
+        const inputName = document.getElementById('signup-name').value;
 
+        // Trigger method to dispatch userSignup thunk action creator 
+        this.props.userSignup(inputName, inputUsername, inputPassword);
     }
 
     render() {
@@ -32,22 +36,22 @@ class SignUpForm extends Component {
                 <h4>Sign Up </h4>
 
                 <FormGroup>
-                    <Label for='name'>First Name</Label>
-                    <Input type='text' id='name' placeholder='First Name'></Input>
+                    <Label>First Name</Label>
+                    <Input type='text' id='signup-name' placeholder='First Name'></Input>
                 </FormGroup>
 
                 <FormGroup>
                     {this.props.error && <ErrorToast errorMessage={this.props.error} />}
-                    <Label for='username'>Username</Label>
-                    <Input type='text' id='username' placeholder='Username'></Input>
+                    <Label>Username</Label>
+                    <Input type='text' id='signup-username' placeholder='Username'></Input>
                 </FormGroup>
 
                 <FormGroup>
-                    <Label for='password'>Password</Label>
-                    <Input type='password' id='password' placeholder='Password'></Input>
+                    <Label>Password</Label>
+                    <Input type='password' id='signup-password' placeholder='Password'></Input>
                 </FormGroup>
 
-                <Button color='primary' onClick={this.handleLogin}>Sign Up</Button>
+                <Button color='primary' onClick={this.handleSignup}>Sign Up</Button>
 
                 <Button color='secondary' className='inline-margin-sm'>
                     <Link to='/'>Log In</Link>
@@ -65,4 +69,4 @@ class SignUpForm extends Component {
     }
 }
 
-export default connect(null, null)(SignUpForm);
+export default connect(null, mapDispatchToProps)(SignUpForm);
