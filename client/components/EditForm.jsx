@@ -1,13 +1,19 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+
+// Grab local user from redux store
+const mapStateToProps = state => ({
+    user_id: state.user.user_id
+});
 
 class EditForm extends Component {
     // Local state to handle changing category buttons 
     constructor(props) {
         super(props);
         this.state = {
-            loading: true, 
+            loading: false, 
             currentItemDetails: {}, 
             category: null
         }
@@ -20,10 +26,13 @@ class EditForm extends Component {
 
     // // On mount, load all current details into the form 
     componentDidMount() {
+        // console.log(this.props.user_id);
+        // console.log(this.props)
         const item_id = (this.props.location.search).substring(1).split('=')[1];
-        // Search database for this data and populate form
+
+        // // Search database for this data and populate form
         // GET /items?user=1&item_id=X
-        fetch(`/items?user=1&item_id=${item_id}`)
+        fetch(`/items?user=${this.props.user_id}&item_id=${item_id}`)
         // fetch(`/items?item_id=${item_id}`)
             .then(data => data.json())
             .then(response => {
@@ -67,6 +76,7 @@ class EditForm extends Component {
             })
         };
 
+        // EDIT BACKEND ROUTE FOR PATCH TO BE /ITEMS?ITEM_ID=X&USER_ID=THIS.PROPS.USER_ID
         fetch(`/items?item_id=${item_id}`, optionsObject)
             .then(data => console.log(data))
             .catch(err => console.log(err));
@@ -149,4 +159,5 @@ class EditForm extends Component {
     }
 }
 
-export default EditForm;
+// export default EditForm;
+export default connect(mapStateToProps, null)(EditForm);

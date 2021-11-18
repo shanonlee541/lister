@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import ErrorToast from "./ErrorToast.jsx";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+// Grab user_id from redux store
+const mapStateToProps = state => ({
+    user_id: state.user.user_id
+});
 
 class AddForm extends Component {
     // Local state to handle changing category buttons 
@@ -49,14 +55,15 @@ class AddForm extends Component {
                 category: category
             })
         }
-        
-        fetch('/items?user=1', optionsObject)
+        // POST request
+        // fetch('/items?user=1', optionsObject)
+        fetch(`/items?user=${this.props.user_id}`, optionsObject)
             .then(response => response.json())
             .then(addedItem => {
                 console.log(`Command: ${addedItem.command} was successful`);
             })
             .catch(err => {
-                console.log(`Request to /items?user=1 failed: ${err}`);
+                console.log(`Request to /items?user=${this.props.user_id} failed: ${err}`);
                 this.setState({ error: `Failed to add item. Error: ${err}`});
             })
     }
@@ -123,7 +130,6 @@ class AddForm extends Component {
                     <Button color='primary' onClick={this.handleSubmit}>Add Item</Button>
     
                     <Button color='secondary' className='left-margin-sm'>
-                        {/* <a href='/dashboard'>Back to Dashboard</a> */}
                         <Link to='/dashboard'>Back to Dashboard</Link>
                     </Button>
                 </Form>
@@ -132,4 +138,5 @@ class AddForm extends Component {
     }
 }
 
-export default AddForm;
+// export default AddForm;
+export default connect(mapStateToProps, null)(AddForm);
