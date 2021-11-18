@@ -7,6 +7,7 @@ import EditForm from './EditForm.jsx';
 import Dashboard from "./Dashboard.jsx";
 import LoginForm from './LoginForm.jsx';
 import LoginComponent from "./LoginComponent.jsx";
+import DashboardContainer from "./DashboardContainer.jsx";
 
 class App extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class App extends Component {
             <Switch>
                 <Route exact path='/add' component={AddForm} />
                 <Route path='/edit' component={EditForm} />
-                <Route exact path='/dashboard' component={Dashboard} />
+                <Route exact path='/dashboard' component={DashboardContainer} />
                 <Route exact path='/' component={LoginComponent} />
             </Switch>
         )

@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { Card, CardTitle, CardBody, CardSubtitle, Button } from 'reactstrap';
+import { Link } from "react-router-dom";
 
 class ItemCard extends Component {
     constructor(props) {
         super(props);
-
-        // // Bind methods 
-        // this.deleteItem = this.deleteItem.bind(this);
     }
-
-
 
     render() {
         // Isolate properties from props objects
@@ -31,7 +27,8 @@ class ItemCard extends Component {
                             </Button>
 
                             <Button color='secondary' className='left-margin-sm'>
-                                <a href={`/edit?item_id=${item_id.toString()}`}>Edit Item</a>
+                                {/* <a href={`/edit?item_id=${item_id.toString()}`}>Edit Item</a> */}
+                                <Link to={`/edit?item_id=${item_id.toString()}`}>Edit Item</Link>
                             </Button>
 
                             <Button color='danger' className='left-margin-sm' id={item_id} onClick={deleteItem}>

@@ -61,6 +61,13 @@ class LoginForm extends Component {
                 </FormGroup>
 
                 <Button color='primary' onClick={this.handleLogin}>Log In</Button>
+
+                <div className='block-margin-lg'>
+                    I am using ReactStrap for style here, but everything else is from scratch!
+                    <br></br>
+                    No create-react-app, I promise :)
+                </div>
+
             </Form>
             )
         )

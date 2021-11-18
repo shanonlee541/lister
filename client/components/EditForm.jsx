@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 class EditForm extends Component {
@@ -84,7 +85,6 @@ class EditForm extends Component {
     render() {
         return (
             <div className='sm-container center margin-top-20'>
-            {this.state.loading && <h2>Loading...</h2>}
             <Form id='edit-form' 
             style= {{ visibility: this.state.loading ? 'hidden' : 'visible' }}>
                 <h2>Edit Item </h2>
@@ -139,7 +139,8 @@ class EditForm extends Component {
                 <Button color='primary' onClick={this.handleSubmit}>Submit Edits</Button>
 
                 <Button color='secondary' className='left-margin-sm'>
-                    <a href='/dashboard'>Back to Dashboard</a>
+                    {/* <a href='/dashboard'>Back to Dashboard</a> */}
+                    <Link to='/dashboard'>Back to Dashboard</Link>
                 </Button>
             </Form>
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import ErrorToast from "./ErrorToast.jsx";
+import { Link } from "react-router-dom";
 
 class AddForm extends Component {
     // Local state to handle changing category buttons 
@@ -122,9 +123,9 @@ class AddForm extends Component {
                     <Button color='primary' onClick={this.handleSubmit}>Add Item</Button>
     
                     <Button color='secondary' className='left-margin-sm'>
-                        <a href='/dashboard'>Back to Dashboard</a>
+                        {/* <a href='/dashboard'>Back to Dashboard</a> */}
+                        <Link to='/dashboard'>Back to Dashboard</Link>
                     </Button>
-
                 </Form>
             </div>
         )

@@ -1,7 +1,20 @@
 import React, { Component } from "react";
-import { render } from 'react-dom';
-import { ButtonGroup, Button, Col, Row } from "reactstrap";
+import { ButtonGroup, Button } from "reactstrap";
 import ItemCard from "./ItemCard.jsx";
+import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
+import { userLogoutActionCreator } from "../actionCreators/userActionCreators.js";
+import { Redirect } from "react-router";
+
+// Grab user ID from props object (state)
+const mapStateToProps = state => ({
+    user_id: state.user.user_id
+})
+
+// ****** TO DO ****** Dispatch logout action
+const mapDispatchToProps = dispatch => ({
+    logoutHandler: () => dispatch(userLogoutActionCreator())
+})
 
 class Dashboard extends Component {
     constructor(props) {
@@ -50,11 +63,7 @@ class Dashboard extends Component {
                 })
             })
             .catch(err => console.log(`Err: ${err}`))
-
-        
     }
-
-
 
     render() {
         const items = [];
@@ -73,6 +82,8 @@ class Dashboard extends Component {
         }
 
         return ( 
+            // When component updates, check if user is logged in. If not, redirect to home. 
+            (!this.props.user_id ? <Redirect to='/' /> : 
             <div className='center margin-top-20'>
                 <div className='flex-row'>
                     <h5 className='right-margin-sm'>Category</h5>
@@ -83,14 +94,20 @@ class Dashboard extends Component {
                         <Button value='food' onClick={this.handleClick}>Food</Button>
                     </ButtonGroup>
                     <Button color='primary' className='inline-margin-sm'>
-                        <a href='/add'>Add Item</a>
+                        <Link to='/add'>Add Item</Link>
+                    </Button>
+
+                    <Button color='secondary' onClick={this.props.logoutHandler}>
+                        Log Out
                     </Button>
                 </div>
 
                 {items}
             </div>
+            )
         )
     }
 }
 
-export default Dashboard;
+// export default Dashboard;
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

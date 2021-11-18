@@ -1,4 +1,4 @@
-import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL } from "../constants/userConstants";
+import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL, USER_LOGOUT } from "../constants/userConstants";
 
 // User login request 
 function userLoginRequest() {
@@ -23,6 +23,13 @@ function userLoginFail(error) {
     }
 }
 
+// User logout
+function userLogoutActionCreator() {
+    return {
+        type: USER_LOGOUT
+    }
+}
+
 // Test Action Creator
 function testActionCreator() {
     return {
@@ -31,4 +38,4 @@ function testActionCreator() {
     }
 }
 
-export { userLoginRequest, userLoginSuccess, userLoginFail, testActionCreator };
+export { userLoginRequest, userLoginSuccess, userLoginFail, userLogoutActionCreator, testActionCreator };

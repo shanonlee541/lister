@@ -1,10 +1,9 @@
-import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL } from "../constants/userConstants";
+import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL, USER_LOGOUT } from "../constants/userConstants";
 
 const initialState = {
     loading: false, 
     error: null,
     user_id: null,
-    testField: null
 }
 
 const userReducer = ( state = initialState, action ) => {
@@ -31,6 +30,15 @@ const userReducer = ( state = initialState, action ) => {
                 ...state, 
                 loading: false, 
                 error: action.payload
+            }
+        }
+
+        // User logout: Clear out user_id field
+        case (USER_LOGOUT): {
+            return {
+                loading: false, 
+                error: null, 
+                user_id: null
             }
         }
 
