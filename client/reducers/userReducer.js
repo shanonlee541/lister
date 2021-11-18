@@ -3,7 +3,8 @@ import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL } from "../cons
 const initialState = {
     loading: false, 
     error: null,
-    user_id: null
+    user_id: 'test_user_id', 
+    testField: null
 }
 
 const userReducer = ( state = initialState, action ) => {
@@ -28,6 +29,14 @@ const userReducer = ( state = initialState, action ) => {
                 ...state, 
                 loading: false, 
                 error: action.payload,
+            }
+        }
+
+        // Test action to fill 'testField' of state
+        case('TEST'): {
+            return {
+                ...state, 
+                testField: action.payload
             }
         }
         

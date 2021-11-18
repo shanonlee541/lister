@@ -3,7 +3,7 @@
 // We'll dispatch this function in our component to trigger fetch requests before 
 // action hits the reducer 
 
-import { userLoginRequest, userLoginSuccess } from "./userActionCreators"
+import { userLoginRequest, userLoginSuccess, userLoginFail } from "./userActionCreators"
 
 function userLogin(username, password) {
     return function (dispatch) {

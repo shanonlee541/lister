@@ -1,27 +1,64 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import { connect } from "react-redux";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
+import { testActionCreator } from "../actionCreators/userActionCreators";
+import userLogin from "../actionCreators/userLogin";
+
+// Put userLogin function into props object using mapDispatchToProps
+const mapDispatchToProps = dispatch => ({
+    // This function doesn't work yet -- "dispatch is not a function"
+    userLogin: (username, password) => dispatch(userLogin(username, password))
+    // testFunc: () => dispatch(testActionCreator())
+});
+
+// Test to see if connect() works -- connect WORKS, mapStateToProps works
+// Something wrong with syntax in mapDispatchToProps
+const mapStateToProps = state => ({
+    user_id: state.user.user_id
+})
 
 class LoginForm extends Component {
-    // Put userLogin function into props using this.props
+    constructor(props) {
+        super(props);
+
+        // Bind methods
+        this.handleLogin = this.handleLogin.bind(this);
+    }
+
+    // Handle user login method
+    handleLogin() {
+        const inputUsername = document.getElementById('username').value;
+        const inputPassword = document.getElementById('password').value;
+        console.log(inputUsername, inputPassword, this.props.user_id);
+        console.log(this.props.userLogin);
+        // this.props.userLogin(inputUsername, inputPassword);
+        // Trigger method to dispatch userLogin action creator -- works
+        this.props.userLogin(inputUsername, inputPassword)
+
+        // Dispatch TEST action (expect: does NOT need to go through thunk)
+        // This works and updates state as expected. 
+        // this.props.testFunc();
+    }
 
     render() {
+
         return (
             <Form className='sm-container center block-margin-lg'>
                 <FormGroup>
                     <Label for='username'>Username</Label>
-                    <Input type='text' placeholder='Username'></Input>
+                    <Input type='text' id='username' placeholder='Username'></Input>
                 </FormGroup>
 
                 <FormGroup>
                     <Label for='username'>Password</Label>
-                    <Input type='password' placeholder='Password'></Input>
+                    <Input type='password' id='password' placeholder='Password'></Input>
                 </FormGroup>
 
-                <Button color='primary'>Log In</Button>
+                <Button color='primary' onClick={this.handleLogin}>Log In</Button>
             </Form>
         )
     }
 }
 
-export default LoginForm;
+export default connect(null, mapDispatchToProps)(LoginForm);

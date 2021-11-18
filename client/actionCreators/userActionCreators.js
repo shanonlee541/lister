@@ -23,4 +23,12 @@ function userLoginFail(error) {
     }
 }
 
-export { userLoginRequest, userLoginSuccess, userLoginFail };
+// Test Action Creator
+function testActionCreator() {
+    return {
+        type: 'TEST', 
+        payload: 'This is my test payload.'
+    }
+}
+
+export { userLoginRequest, userLoginSuccess, userLoginFail, testActionCreator };
