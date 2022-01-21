@@ -53,7 +53,6 @@ else {
             .status(customError.status)
             .send(customError.messsage);
     })
-
 }
 
 app.listen(3000, () => console.log(`Listening on port 3000 in ${process.env.NODE_ENV} mode...`))
