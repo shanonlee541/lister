@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { render } from 'react-dom';
 import { ButtonGroup, Button, Col, Row } from "reactstrap";
 import ItemCard from "./ItemCard.jsx";
 
@@ -53,8 +52,6 @@ class Dashboard extends Component {
 
         
     }
-
-
 
     render() {
         const items = [];

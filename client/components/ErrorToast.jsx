@@ -1,6 +1,5 @@
 
 import React, { Component } from "react";
-import { render } from "react-dom";
 import { Alert } from "reactstrap";
 
 class ErrorToast extends Component {

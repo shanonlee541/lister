@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
 import { Card, CardTitle, CardBody, CardSubtitle, Button } from 'reactstrap';
 
 class ItemCard extends Component {
     constructor(props) {
         super(props);
-
-        // // Bind methods 
-        // this.deleteItem = this.deleteItem.bind(this);
     }
 
 
