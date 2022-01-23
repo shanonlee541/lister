@@ -10,5 +10,9 @@ module.exports = {
     query: function (queryString, params, callback) {
         console.log(`Executed query: ${queryString}`);
         return pool.query(queryString, params, callback);
+    },
+
+    end: function() {
+        pool.end();
     }
 }
