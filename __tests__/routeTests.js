@@ -7,32 +7,20 @@ describe('Route integration', () => {
     // Testing routes to /items
     describe('/items', () => {
 
-        // Before All, remove user with user_id if exists 
+        // Before All, create test user  
         beforeAll((done) => {
-            const queryString = `SELECT * FROM users WHERE user_id=3`;
-            db.query(queryString)
+            const queryString = `INSERT INTO users (user_id, username, password, firstname) VALUES ($1, $2 ,$3, $4)`;
+            const values = [880783, 'testUser', 'testUser', 'testUser'];
+
+            db.query(queryString, values)
                 .then(data => {
-                    // If user with user_id 3 exists, delete user 
-                    if (data.rows.length) {
-                        const deleteQuery = `DELETE FROM users WHERE user_id=3`;
-                        db.query(deleteQuery)
-                            .then(() => { 
-                                // Return OK signal 
-                                return 0;
-                            })
-                            .err(() => {
-                                // Return failure signal: failed to delete 
-                                return 1;
-                            })
-                    }
+                    console.log(data.rows)
                 })
 
                 .catch(err => {
                     console.log(err);
                 })
-
-                done();
-            
+            done();
         })
 
         // After all, close the connection to the pool 
@@ -45,13 +33,13 @@ describe('Route integration', () => {
             // Successful GET request to /items?user=1&category=X
             it ('responds with 200 status and JSON content type on success', () => {
                 return request(server)
-                    .get('/items?user=3&category=home')
+                    .get('/items?user=880783&category=home')
                     .expect('Content-Type', 'application/json; charset=utf-8')
                     .expect(200)
             })
         })
 
-        // Testing POSt to /items (add a new item entry)
+        // Testing POST to /items (add a new item entry)
         describe('POST /items - add new item entry to DB', () => {
             // Clear out any additions to db in each test 
             afterEach(() => {
@@ -63,7 +51,7 @@ describe('Route integration', () => {
             // Successful POST request 
             it ('responds with 200 status, JSON content type, and newly added item on success', () => {
                 return request(server)
-                    .post('/items?user=1')
+                    .post('/items?user=880783')
                     .send({ 
                         name: "79db5bbfb39a4a62820a02618ac02e88", 
                         price: "50", 
@@ -73,6 +61,19 @@ describe('Route integration', () => {
                     })
                     .expect('Content-Type', 'application/json; charset=utf-8')
                     .expect(200)
+            })
+
+            // Unsuccessful POST request - No name provided 
+            it ('responds with 400 status when item name is not provided', () => {
+                return request(server)
+                    .post('/items?user=880783')
+                    .send({
+                        price: "50", 
+                        description: "Test Item Description", 
+                        url: "www.myTestURL.com", 
+                        category: "home"
+                    })
+                    .expect(400)
             })
         })
     })

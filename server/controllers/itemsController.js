@@ -8,7 +8,6 @@ itemsController.addItem = (req, res, next) => {
     // Check all fields are present 
     const { name, price, description, url, category } = req.body;
     const user_id = req.query.user;
-
     if (!name || !price || !description || !url || !category) {
         return next({
             status: 400, 
