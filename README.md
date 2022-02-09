@@ -26,6 +26,6 @@
 
 <br>
 <p><b>Tech Stack</b></p>
-<a href='https://reactjs.org/'>React</a>, <a href='https://reactrouter.com/'>React Router</a>, <a href='https://reactstrap.github.io/'>ReactStrap</a>, <a href='http://expressjs.com/'>Express</a>, <a href='https://www.postgresql.org/'>PostgreSQL</a>, <a href='https://webpack.js.org/'>Webpack</a>, <a href='https://jestjs.io/'>Jest</a>, <a href='https://www.npmjs.com/package/supertest'>SuperTest</a>, 
+<a href='https://reactjs.org/'>React</a>, <a href='https://reactrouter.com/'>React Router</a>, <a href='https://reactstrap.github.io/'>ReactStrap</a>, <a href='http://expressjs.com/'>Express</a>, <a href='https://www.postgresql.org/'>PostgreSQL</a>, <a href='https://webpack.js.org/'>Webpack</a>, <a href='https://jestjs.io/'>Jest</a>, <a href='https://www.npmjs.com/package/supertest'>SuperTest</a>
 
 
