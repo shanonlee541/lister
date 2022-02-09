@@ -59,7 +59,7 @@ describe('Route integration', () => {
                     .post('/items?user=1')
                     .send({ 
                         name: "Test Item", 
-                        price: 50, 
+                        price: "50", 
                         description: "Test Item Description", 
                         url: "www.myTestURL.com", 
                         category: "home"
