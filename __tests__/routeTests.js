@@ -53,12 +53,19 @@ describe('Route integration', () => {
 
         // Testing POSt to /items (add a new item entry)
         describe('POST /items - add new item entry to DB', () => {
+            // Clear out any additions to db in each test 
+            afterEach(() => {
+                const queryString = `DELETE FROM items
+                WHERE name = '79db5bbfb39a4a62820a02618ac02e88';`
+                db.query(queryString)
+            })
+
             // Successful POST request 
             it ('responds with 200 status, JSON content type, and newly added item on success', () => {
                 return request(server)
                     .post('/items?user=1')
                     .send({ 
-                        name: "Test Item", 
+                        name: "79db5bbfb39a4a62820a02618ac02e88", 
                         price: "50", 
                         description: "Test Item Description", 
                         url: "www.myTestURL.com", 
