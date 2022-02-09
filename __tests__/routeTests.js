@@ -23,8 +23,12 @@ describe('Route integration', () => {
             done();
         })
 
-        // After all, close the connection to the pool 
+        // After all, clean up & close the connection to the pool 
         afterAll(() => {
+            // Delete test user from DB 
+            const queryString = 'DELETE FROM users WHERE user_id = 880783';
+            db.query(queryString);
+            // Close connect to pool 
             db.end();
         })
 
