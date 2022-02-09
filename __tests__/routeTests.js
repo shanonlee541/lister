@@ -41,11 +41,29 @@ describe('Route integration', () => {
         })
 
         // Testing GET request to /items (fetch all items by user and category)
-        describe('GET - fetch all items by user and category', () => {
+        describe('GET /items - fetch all items by user and category', () => {
             // Successful GET request to /items?user=1&category=X
-            it ('responds with 200 status and JSON content type', () => {
+            it ('responds with 200 status and JSON content type on success', () => {
                 return request(server)
                     .get('/items?user=3&category=home')
+                    .expect('Content-Type', 'application/json; charset=utf-8')
+                    .expect(200)
+            })
+        })
+
+        // Testing POSt to /items (add a new item entry)
+        describe('POST /items - add new item entry to DB', () => {
+            // Successful POST request 
+            it ('responds with 200 status, JSON content type, and newly added item on success', () => {
+                return request(server)
+                    .post('/items?user=1')
+                    .send({ 
+                        name: "Test Item", 
+                        price: 50, 
+                        description: "Test Item Description", 
+                        url: "www.myTestURL.com", 
+                        category: "home"
+                    })
                     .expect('Content-Type', 'application/json; charset=utf-8')
                     .expect(200)
             })
